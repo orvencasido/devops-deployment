@@ -6,12 +6,12 @@ grafana:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
     hosts:
-      - grafana.orvencasido.site
+      - grafana-devops.orvencasido.site
     path: /
     tls:
       - secretName: grafana-tls
         hosts:
-          - grafana.orvencasido.site
+          - grafana-devops.orvencasido.site
   
   # Optional: Set admin password (default is 'prom-operator')
   adminPassword: admin
