@@ -1,0 +1,28 @@
+grafana:
+  enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      - grafana.orvencasido.site
+    path: /
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - grafana.orvencasido.site
+  
+  # Optional: Set admin password (default is 'prom-operator')
+  adminPassword: admin
+
+prometheus:
+  prometheusSpec:
+    # Use this to ensure Prometheus data persists if the pod restarts
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
