@@ -1,3 +1,22 @@
-image:
+image: 
   repository: orvencasido/orvencasido-headless
   tag: latest
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: app.orvencasido.site
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: app-tls
+      hosts:
+        - app.orvencasido.site
